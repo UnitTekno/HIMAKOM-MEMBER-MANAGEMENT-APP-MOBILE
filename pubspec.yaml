@@ -1,0 +1,41 @@
+name: HIMAKOM
+description: A new Flutter project.
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  carousel_slider: ^4.2.1
+  cupertino_icons: ^1.0.2
+  date_picker_timeline: ^1.2.3
+  expandable: ^5.0.1
+  flutter:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  get: 4.6.5
+  google_fonts: any
+  intl: any
+  salomon_bottom_bar: ^3.3.2
+  shared_preferences: any 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/icon_app.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo/
+    - assets/backgrounds/
+    - assets/icons/

@@ -13,6 +13,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   date_picker_timeline: ^1.2.3
   expandable: ^5.0.1
+  firebase_core: ^2.15.1
+  firebase_messaging: ^14.6.7
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1

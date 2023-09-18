@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 
+import '../bindings/notification_binding.dart';
 import '../views/pages/auth_page/auth_page.dart';
 import '../views/pages/base_page.dart';
 import '../views/pages/home_page/home_page.dart';
+import '../views/pages/home_page/notification_page/notification_page.dart';
 
 import '../bindings/auth_binding.dart';
 import '../bindings/base_binding.dart';
@@ -25,6 +27,11 @@ class AppPages {
       name: RouteName.kepengurusanRoute,
       page: () => const HomePage(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: RouteName.notificationRoute,
+      page: () => const NotificationPage(),
+      binding: NotificationBinding(),
     ),
   ];
 }

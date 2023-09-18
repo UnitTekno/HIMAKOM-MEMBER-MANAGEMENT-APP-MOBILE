@@ -7,6 +7,7 @@ import '../../../constants/app_colors.dart';
 import '../../../constants/app_images.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../controllers/kepengurusan_controller.dart';
+import '../../../routes/app_routes.dart';
 import '../../widgets/appBar_widget.dart';
 import '../../widgets/departments_widget.dart';
 import '../../widgets/drawCLip_widget.dart';
@@ -27,6 +28,14 @@ class HomePage extends GetView<AuthController> {
           toolbarHeight: 80,
           elevation: 2,
           title: ProfileAppbar(user: controllerAuth.auth.value.user),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.toNamed(RouteName.notificationRoute);
+              },
+              icon: const Icon(Icons.notifications),
+            ),
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: controller.getKepengurusan,

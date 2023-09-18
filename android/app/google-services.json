@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "514264683872",
+    "project_id": "app-himakom",
+    "storage_bucket": "app-himakom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514264683872:android:d823593b1350954b8dfa05",
+        "android_client_info": {
+          "package_name": "com.example.kepengurusan_himakom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7Bwg4MpDXgnhfHJVJHxv5QX9DF3rhDvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

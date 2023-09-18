@@ -19,7 +19,8 @@ class BarDateNowWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
+        Expanded(
+          flex: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,19 +37,22 @@ class BarDateNowWidget extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          width: 100,
-          height: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: AppColors.WHITE,
-          ),
-          child: Center(
-            child: Text("$jumlahKegiatan Kegiatan",
-                style: GoogleFonts.poppins(
-                    color: AppColors.BLACK,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold)),
+        Expanded(
+          flex: 1,
+          child: Container(
+            width: 100,
+            height: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: AppColors.WHITE,
+            ),
+            child: Center(
+              child: Text("$jumlahKegiatan Kegiatan",
+                  style: GoogleFonts.poppins(
+                      color: AppColors.BLACK,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold)),
+            ),
           ),
         )
       ],

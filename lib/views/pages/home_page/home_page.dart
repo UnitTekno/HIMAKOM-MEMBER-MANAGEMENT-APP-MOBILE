@@ -79,7 +79,8 @@ class HomePage extends GetView<AuthController> {
                               style: GoogleFonts.poppins(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
-                              )),
+                              ),
+                              textAlign: TextAlign.center),
                         ),
                         Column(
                           children: [

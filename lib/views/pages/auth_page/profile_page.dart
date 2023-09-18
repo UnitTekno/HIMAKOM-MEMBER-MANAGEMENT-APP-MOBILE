@@ -39,7 +39,7 @@ class ProfilePage extends GetView {
                   top: Get.height * 0.2,
                   child: Container(
                     width: 320,
-                    height: 240,
+                    height: Get.height * 0.35,
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -53,7 +53,7 @@ class ProfilePage extends GetView {
                     child: Column(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: ClipRRect(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(20),
@@ -78,8 +78,7 @@ class ProfilePage extends GetView {
                                 .bottomCenter, // Container akan berada di bagian bawah
                             child: Container(
                               width: double.infinity,
-                              height: 100,
-                              // Lebar container mengisi seluruh lebar parent (320)
+                              height: Get.height,
                               decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(30),
@@ -93,8 +92,9 @@ class ProfilePage extends GetView {
                                   Container(
                                     margin: const EdgeInsets.only(top: 10),
                                     child: Text(
-                                      controller.auth.value.user.name
-                                          .toUpperCase(),
+                                      controller.auth.value.user.name.isNotEmpty ? 
+                                      controller.auth.value.user.name.toUpperCase()
+                                      : '-',
                                       style: GoogleFonts.poppins(
                                         color: AppColors.WHITE,
                                         fontSize: 22,
@@ -108,7 +108,8 @@ class ProfilePage extends GetView {
                                   Container(
                                     margin: const EdgeInsets.only(top: 1),
                                     child: Text(
-                                      controller.auth.value.user.nim,
+                                      controller.auth.value.user.nim.isNotEmpty ? 
+                                      controller.auth.value.user.nim : '-',
                                       style: GoogleFonts.poppins(
                                         color: Colors.white,
                                         fontSize: 15,
@@ -122,28 +123,20 @@ class ProfilePage extends GetView {
                                   ),
                                   Container(
                                     margin: const EdgeInsets.only(top: 1),
-                                    child: controller.auth.value.user.namaBagus
-                                            .isNotEmpty
-                                        ? Text(
-                                            controller
-                                                .auth.value.user.namaBagus,
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            textAlign: TextAlign.center,
-                                          )
-                                        : Text(
-                                            '-',
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
+                                    child: Text(
+                                      controller.auth.value.user.namaBagus
+                                              .isNotEmpty
+                                          ? controller.auth.value.user.namaBagus
+                                          : '-',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -164,7 +157,7 @@ class ProfilePage extends GetView {
                   height: 80,
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(
-                      top: 10, left: 20, right: 20, bottom: 10),
+                      top: 20, left: 20, right: 20, bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     // shadow

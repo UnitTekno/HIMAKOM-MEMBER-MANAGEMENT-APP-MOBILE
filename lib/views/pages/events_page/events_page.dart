@@ -53,6 +53,7 @@ class EventsPage extends GetView {
                         ],
                       )),
                       Expanded(
+                        flex: 1,
                         child: Container(
                             margin: const EdgeInsets.only(top: 15),
                             width: Get.width,

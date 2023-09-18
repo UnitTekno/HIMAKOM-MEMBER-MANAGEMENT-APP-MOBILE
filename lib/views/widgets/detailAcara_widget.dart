@@ -20,7 +20,7 @@ Future<void> detailAcara(
     context: context, // Ambil context dari parameter builder.
     builder: (BuildContext context) {
       return Container(
-        height: Get.height * 0.4,
+        height: Get.height * 0.5,
         margin: const EdgeInsets.all(10),
         child: Column(
           children: [
@@ -97,24 +97,30 @@ Future<void> detailAcara(
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                dateFormat(listAcara[index].date),
-                                style: GoogleFonts.poppins(
-                                  color: colorByDayLeft(
-                                      dayLeftInt(listAcara[index].date)),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(left: 5),
+                              Expanded(
+                                flex: 2,
                                 child: Text(
-                                  listAcara[index].time,
+                                  dateFormat(listAcara[index].date),
                                   style: GoogleFonts.poppins(
                                     color: colorByDayLeft(
                                         dayLeftInt(listAcara[index].date)),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 01,
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    listAcara[index].time,
+                                    style: GoogleFonts.poppins(
+                                      color: colorByDayLeft(
+                                          dayLeftInt(listAcara[index].date)),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),

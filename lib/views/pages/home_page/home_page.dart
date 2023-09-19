@@ -152,7 +152,7 @@ class HomePage extends GetView<AuthController> {
                             Container(
                               margin: const EdgeInsets.only(bottom: 20),
                               padding: const EdgeInsets.only(
-                                  left: 20, right: 20, top: 10),
+                                  left: 20, right: 20, top: 10, bottom: 10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: const [

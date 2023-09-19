@@ -67,7 +67,6 @@ class ListAcara extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          color: AppColors.GREEN,
                           alignment: Alignment.centerLeft,
                           width: screenWidth * 0.2,
                           child: Image.network(listAcara[index].poster,

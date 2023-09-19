@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, file_names
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:expandable/expandable.dart';
@@ -112,15 +113,32 @@ Widget contentInfoKegiatan(isCollapsed, listKegiatan, jumlahKegiatan) {
                       ),
                       Container(
                         margin: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          dayLeft(listKegiatan[0].date),
-                          style: GoogleFonts.poppins(
-                            color: colorByDayLeft(
-                                dayLeftInt(listKegiatan[0].date)),
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            TyperAnimatedText(
+                              dayLeft(listKegiatan[0].date),
+                              textStyle: GoogleFonts.poppins(
+                                color: colorByDayLeft(
+                                    dayLeftInt(listKegiatan[0].date)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              speed: const Duration(milliseconds: 100),
+                            ),
+                          ],
+                          repeatForever: true,
+                          totalRepeatCount: 100,
                         ),
+
+                        // child: Text(
+                        //   dayLeft(listKegiatan[0].date),
+                        //   style: GoogleFonts.poppins(
+                        //     color: colorByDayLeft(
+                        //         dayLeftInt(listKegiatan[0].date)),
+                        //     fontSize: 15,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
                       ),
                     ],
                   ),

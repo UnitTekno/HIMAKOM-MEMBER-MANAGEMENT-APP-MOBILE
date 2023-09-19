@@ -9,6 +9,7 @@ environment:
   sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
+  animated_text_kit: ^4.2.2
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   date_picker_timeline: ^1.2.3

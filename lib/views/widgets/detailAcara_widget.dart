@@ -46,11 +46,29 @@ Future<void> detailAcara(
               children: [
                 Expanded(
                   flex: 0,
-                  child: SizedBox(
-                    width: 100,
-                    child: Image.network(
-                      listAcara[index].poster,
-                      fit: BoxFit.fitHeight,
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: Colors.transparent,
+                              content: SizedBox(
+                                child: Image.network(
+                                  listAcara[index].poster,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                    },
+                    child: SizedBox(
+                      width: 100,
+                      child: Image.network(
+                        listAcara[index].poster,
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
                   ),
                 ),

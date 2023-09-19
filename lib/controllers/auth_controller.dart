@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/app_images.dart';
 import '../data/providers/auth_provider.dart';
+import '../data/services/notification_services.dart';
 import '../models/auth_model.dart';
 import '../routes/app_routes.dart';
 
@@ -72,10 +73,16 @@ class AuthController extends GetxController {
       isLoading.value = true;
       isLoginFail.value = false;
       auth.value = await AuthProvider().login(email, password);
+
       final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final deviceToken = prefs.getString('fcmToken') ?? '';
+      
       prefs.setString('accessToken', auth.value.accessToken);
+      NotificationService().putDeviceToken(deviceToken);
+
       isLoginSuccess.value = true;
       await Future.delayed(const Duration(seconds: 1));
+
       Get.toNamed(RouteName.baseRoute);
     } catch (error) {
       isLoginFail.value = true;

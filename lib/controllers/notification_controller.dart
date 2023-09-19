@@ -1,7 +1,6 @@
-import 'package:HIMAKOM/data/services/notification_services.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> _handleBackgroundMessage(RemoteMessage message) async {
   print('Handling a background message ${message.messageId}');
@@ -34,9 +33,10 @@ class NotificationController extends GetxController {
   }
 
   Future<void> initNotifications() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();
-    NotificationService().putDeviceToken(fCMToken ?? '');
+    prefs.setString('fcmToken', fCMToken ?? '');
     initPushNotification();
   }
 

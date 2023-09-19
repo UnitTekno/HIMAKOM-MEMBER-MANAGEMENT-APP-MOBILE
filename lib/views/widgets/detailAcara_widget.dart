@@ -11,6 +11,7 @@ import '../../utils/random_color.dart';
 Future<void> detailAcara(
     BuildContext context, int index, List<dynamic> listAcara) {
   return showModalBottomSheet(
+    isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(20),
@@ -20,7 +21,7 @@ Future<void> detailAcara(
     context: context, // Ambil context dari parameter builder.
     builder: (BuildContext context) {
       return Container(
-        height: Get.height * 0.5,
+        height: Get.height * 0.7,
         margin: const EdgeInsets.all(10),
         child: Column(
           children: [

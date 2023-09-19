@@ -19,6 +19,7 @@ class HorizontalDatePicker extends StatelessWidget {
       DateTime.now(),
       width: Get.width * 0.2,
       height: Get.height * 0.15,
+      daysCount: 30,
       initialSelectedDate: DateTime.now(),
       selectionColor: Colors.white,
       selectedTextColor: Colors.black,

@@ -10,10 +10,21 @@ int dateOnly(DateTime date) {
   return int.parse(dateFormat.format(date));
 }
 
+int dayLeftInt(DateTime eventDate) {
+  final currentDate = DateTime.now();
+  final eventDateOnly =
+      DateTime(eventDate.year, eventDate.month, eventDate.day);
+  final currentDateOnly =
+      DateTime(currentDate.year, currentDate.month, currentDate.day);
+
+  final difference = eventDateOnly.difference(currentDateOnly);
+  final daysLeft = difference.inDays;
+
+  return daysLeft;
+}
+
 String dayLeft(DateTime date) {
-  int dateNow = dateOnly(DateTime.now());
-  int dateEvent = dateOnly(date);
-  int dayLeft = dateEvent - dateNow;
+  int dayLeft = dayLeftInt(date) - dayLeftInt(DateTime.now());
 
   if (dayLeft == 0) {
     return "Hari ini";
@@ -28,17 +39,4 @@ String dayLeft(DateTime date) {
   } else {
     return "";
   }
-}
-
-int dayLeftInt(DateTime eventDate) {
-  final currentDate = DateTime.now();
-  final eventDateOnly =
-      DateTime(eventDate.year, eventDate.month, eventDate.day);
-  final currentDateOnly =
-      DateTime(currentDate.year, currentDate.month, currentDate.day);
-
-  final difference = eventDateOnly.difference(currentDateOnly);
-  final daysLeft = difference.inDays;
-
-  return daysLeft;
 }

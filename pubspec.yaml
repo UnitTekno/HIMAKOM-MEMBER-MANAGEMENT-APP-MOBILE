@@ -22,6 +22,7 @@ dependencies:
   get: 4.6.5
   google_fonts: any
   intl: any
+  overlay_support: ^2.1.0
   salomon_bottom_bar: ^3.3.2
   shared_preferences: any 
 

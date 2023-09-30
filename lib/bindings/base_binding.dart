@@ -1,3 +1,4 @@
+import 'package:HIMAKOM/controllers/notification_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/auth_controller.dart';
@@ -10,5 +11,6 @@ class BasePageBinding extends Bindings {
     Get.lazyPut<BasePageController>(() => BasePageController());
     Get.lazyPut<AuthController>(() => AuthController());
     Get.lazyPut<KepengurusanController>(() => KepengurusanController());
+    Get.lazyPut<NotificationController>(() => NotificationController());
   }
 }

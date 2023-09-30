@@ -6,13 +6,13 @@ KabinetModel kabinetModelFromJson(String str) =>
 String kabinetModelToJson(KabinetModel data) => json.encode(data.toJson());
 
 class KabinetModel {
+  String status;
+  List<Datum> data;
+
   KabinetModel({
     required this.status,
     required this.data,
   });
-
-  String status;
-  List<Datum> data;
 
   factory KabinetModel.fromJson(Map<String, dynamic> json) => KabinetModel(
         status: json["status"],
@@ -26,37 +26,74 @@ class KabinetModel {
 }
 
 class Datum {
-  Datum({
-    required this.name,
-    required this.description,
-    required this.logo,
-    required this.filosofy,
-    required this.misi,
-    required this.visi,
-  });
-
+  int id;
   String name;
   String description;
-  String logo;
-  String filosofy;
   String visi;
   String misi;
+  String logo;
+  String filosofy;
+  List<Filosofy> filosofies;
+
+  Datum({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.visi,
+    required this.misi,
+    required this.logo,
+    required this.filosofy,
+    required this.filosofies,
+  });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        id: json["id"],
         name: json["name"],
         description: json["description"],
-        logo: json["logo"],
-        filosofy: json["filosofy"],
         visi: json["visi"],
         misi: json["misi"],
+        logo: json["logo"],
+        filosofy: json["filosofy"],
+        filosofies: List<Filosofy>.from(
+            json["filosofies"].map((x) => Filosofy.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
         "description": description,
-        "logo": logo,
-        "filosofy": filosofy,
         "visi": visi,
         "misi": misi,
+        "logo": logo,
+        "filosofy": filosofy,
+        "filosofies": List<dynamic>.from(filosofies.map((x) => x.toJson())),
+      };
+}
+
+class Filosofy {
+  int id;
+  int cabinetId;
+  String label;
+  String logo;
+
+  Filosofy({
+    required this.id,
+    required this.cabinetId,
+    required this.label,
+    required this.logo,
+  });
+
+  factory Filosofy.fromJson(Map<String, dynamic> json) => Filosofy(
+        id: json["id"],
+        cabinetId: json["cabinet_id"],
+        label: json["label"],
+        logo: json["logo"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "cabinet_id": cabinetId,
+        "label": label,
+        "logo": logo,
       };
 }

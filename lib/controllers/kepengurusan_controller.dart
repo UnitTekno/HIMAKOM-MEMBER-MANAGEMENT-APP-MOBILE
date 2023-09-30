@@ -22,8 +22,8 @@ class KepengurusanController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     getKepengurusan();
+    super.onInit();
   }
 
   @override

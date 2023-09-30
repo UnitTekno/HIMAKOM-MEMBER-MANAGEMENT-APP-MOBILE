@@ -31,7 +31,6 @@ class AppPages {
     GetPage(
       name: RouteName.notificationRoute,
       page: () => const NotificationPage(),
-      binding: NotificationBinding(),
     ),
   ];
 }

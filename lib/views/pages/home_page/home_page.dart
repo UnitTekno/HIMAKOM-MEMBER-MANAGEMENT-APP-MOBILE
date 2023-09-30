@@ -1,3 +1,4 @@
+import 'package:HIMAKOM/controllers/notification_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../../routes/app_routes.dart';
 import '../../widgets/appBar_widget.dart';
 import '../../widgets/departments_widget.dart';
 import '../../widgets/drawCLip_widget.dart';
+import '../../widgets/notification_badge_widget.dart';
 import '../../widgets/pengurus_widget.dart';
 
 class HomePage extends GetView<AuthController> {
@@ -20,6 +22,9 @@ class HomePage extends GetView<AuthController> {
   Widget build(BuildContext context) {
     final controller = Get.find<KepengurusanController>();
     final controllerAuth = Get.find<AuthController>();
+    final controllerNotif = Get.find<NotificationController>();
+    final screenWidth = Get.width;
+    final screenHeight = Get.height;
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
@@ -29,11 +34,11 @@ class HomePage extends GetView<AuthController> {
           elevation: 2,
           title: ProfileAppbar(user: controllerAuth.auth.value.user),
           actions: [
-            IconButton(
+            NotificationBadge(
+              totalNotifications: controllerNotif.totalNotifications.value,
               onPressed: () {
                 Get.toNamed(RouteName.notificationRoute);
               },
-              icon: const Icon(Icons.notifications),
             ),
           ],
         ),
@@ -234,6 +239,52 @@ class HomePage extends GetView<AuthController> {
                               ),
                             ),
                           ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 5),
+                                ),
+                              ],
+                              color: AppColors.WHITE),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Filosofi',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                height: 200,
+                                child: ListView.builder(
+                                  itemCount: controller.kabinet.value.data[0].filosofies.length,
+                                  itemBuilder: (context, index) {
+                                    final filosofiItem =
+                                        controller.kabinet.value.data[0].filosofies[index];
+                                    return ListTile(
+                                      leading: Image.network(
+                                        filosofiItem.logo,
+                                      ),
+                                      title: Text(
+                                        filosofiItem.label,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),

@@ -21,6 +21,7 @@ import 'views/pages/splash_page.dart';
 
 void main() async {
   try {
+    NotificationController().setFCMToken();
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

@@ -242,6 +242,8 @@ class HomePage extends GetView<AuthController> {
                         ),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 10, bottom: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: const [
@@ -255,22 +257,34 @@ class HomePage extends GetView<AuthController> {
                           child: Column(
                             children: [
                               Text(
-                                'Filosofi',
+                                'Filosofi Logo Kabinet',
                                 style: GoogleFonts.poppins(
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
                                 height: 200,
                                 child: ListView.builder(
-                                  itemCount: controller.kabinet.value.data[0].filosofies.length,
+                                  itemCount: controller
+                                      .kabinet.value.data[0].filosofies.length,
                                   itemBuilder: (context, index) {
-                                    final filosofiItem =
-                                        controller.kabinet.value.data[0].filosofies[index];
+                                    final filosofiItem = controller.kabinet
+                                        .value.data[0].filosofies[index];
                                     return ListTile(
-                                      leading: Image.network(
-                                        filosofiItem.logo,
+                                      leading: ClipOval(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: Image.network(
+                                            controller.kabinet.value.data[0]
+                                                .filosofies[index].logo,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                       title: Text(
                                         filosofiItem.label,

@@ -27,8 +27,24 @@ class NotificationPage extends GetView {
       ),
       body: Obx(() {
         return ListView.builder(
-            itemBuilder: (context, index) {
-              return Container(
+          itemBuilder: (context, index) {
+            return Dismissible(
+              key: UniqueKey(),
+              direction: DismissDirection.endToStart,
+              onDismissed: (direction) {
+                controller.notificationRead(
+                    controller.notificationsInfo.value.data[index].id);
+              },
+              background: Container(
+                color: AppColors.RED,
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.only(right: 20),
+                child: const Icon(
+                  Icons.delete,
+                  color: AppColors.WHITE,
+                ),
+              ),
+              child: Container(
                 height: screenHeight * 0.15,
                 margin: const EdgeInsets.only(bottom: 20),
                 decoration: BoxDecoration(
@@ -49,10 +65,11 @@ class NotificationPage extends GetView {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         width: screenWidth * 0.2,
-                        child: Image.network(controller.notificationsInfo.value.data[index].poster,
-                            fit: BoxFit.cover,
-                            height: double.infinity,
-                            ),
+                        child: Image.network(
+                          controller.notificationsInfo.value.data[index].poster,
+                          fit: BoxFit.cover,
+                          height: double.infinity,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -65,7 +82,9 @@ class NotificationPage extends GetView {
                           children: [
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
-                              child: Text(controller.notificationsInfo.value.data[index].title,
+                              child: Text(
+                                  controller.notificationsInfo.value.data[index]
+                                      .title,
                                   style: GoogleFonts.poppins(
                                       color: AppColors.BLACK,
                                       fontSize: screenWidth * 0.05,
@@ -76,10 +95,10 @@ class NotificationPage extends GetView {
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               child: Text(
-                                controller.notificationsInfo.value.data[index].body,
+                                controller
+                                    .notificationsInfo.value.data[index].body,
                                 style: GoogleFonts.poppins(
-                                  color:
-                                      const Color.fromARGB(255, 94, 94, 94),
+                                  color: const Color.fromARGB(255, 94, 94, 94),
                                   fontSize: screenWidth * 0.03,
                                 ),
                                 overflow: TextOverflow.ellipsis,
@@ -92,10 +111,11 @@ class NotificationPage extends GetView {
                     ),
                   ],
                 ),
-              );
-            },
-            itemCount: controller.notificationsInfo.value.data.length,
-          );
+              ),
+            );
+          },
+          itemCount: controller.notificationsInfo.value.data.length,
+        );
       }),
     );
   }

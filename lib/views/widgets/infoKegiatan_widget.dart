@@ -67,7 +67,7 @@ Widget contentInfoKegiatan(isCollapsed, listKegiatan, jumlahKegiatan) {
     var controller = ExpandableController.of(context, required: true)!;
     return Container(
       alignment: Alignment.center,
-      height: (isCollapsed && (jumlahKegiatan < 2)) || (!isCollapsed && (jumlahKegiatan < 2)) ? 155 : null,
+      height: (isCollapsed && (jumlahKegiatan <= 2)) || (!isCollapsed && (jumlahKegiatan <= 2)) ? 155 : null,
       child: Container(
         margin: const EdgeInsets.only(left: 20),
         padding: const EdgeInsets.only(top: 10, right: 20),

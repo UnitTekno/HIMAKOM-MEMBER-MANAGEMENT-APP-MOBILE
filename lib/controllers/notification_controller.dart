@@ -23,22 +23,34 @@ class NotificationController extends GetxController {
     data: [],
   ).obs;
 
-  @override
-  void onInit() async {
+  void getNotifications() async {
     notificationsInfo.value = await NotificationService().getNotifications();
     totalNotifications.value = notificationsInfo.value.data.length;
+  }
+
+  void setFCMToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await Firebase.initializeApp();
+    _messaging = FirebaseMessaging.instance;
+    final fcmToken = await _messaging.getToken();
+    prefs.setString('fcmToken', fcmToken!);
+  }
+
+  @override
+  void onInit() async {
+    getNotifications();
     registerNotification();
     checkForInitialMessage();
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      totalNotifications++;
+      getNotifications();
+      Get.toNamed(RouteName.notificationRoute);
     });
     super.onInit();
   }
 
   void onMessage(RemoteMessage message) async {
-    notificationsInfo.value = await NotificationService().getNotifications();
-    totalNotifications++;
+    getNotifications();
 
     showSimpleNotification(
       Text(
@@ -92,10 +104,6 @@ class NotificationController extends GetxController {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final fcmToken = await _messaging.getToken();
-      prefs.setString('fcmToken', fcmToken!);
-
       FirebaseMessaging.onMessage.listen(onMessage);
     } else {
       print('User declined or has not accepted permission');
@@ -108,7 +116,7 @@ class NotificationController extends GetxController {
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      totalNotifications++;
+      getNotifications();
     }
   }
 

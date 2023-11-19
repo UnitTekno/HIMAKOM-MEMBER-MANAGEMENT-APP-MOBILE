@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:HIMAKOM/constants/app_colors.dart';
 import 'package:HIMAKOM/models/push_notification_model.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/services/notification_services.dart';
 import '../routes/app_routes.dart';
@@ -23,34 +24,24 @@ class NotificationController extends GetxController {
     data: [],
   ).obs;
 
-  void getNotifications() async {
-    notificationsInfo.value = await NotificationService().getNotifications();
-    totalNotifications.value = notificationsInfo.value.data.length;
-  }
-
-  void setFCMToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await Firebase.initializeApp();
-    _messaging = FirebaseMessaging.instance;
-    final fcmToken = await _messaging.getToken();
-    prefs.setString('fcmToken', fcmToken!);
-  }
-
   @override
   void onInit() async {
-    getNotifications();
+    notificationsInfo.value = await NotificationService().getNotifications();
+    totalNotifications.value = notificationsInfo.value.data.length;
     registerNotification();
     checkForInitialMessage();
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      getNotifications();
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      notificationsInfo.value = await NotificationService().getNotifications();
+      totalNotifications++;
       Get.toNamed(RouteName.notificationRoute);
     });
     super.onInit();
   }
 
   void onMessage(RemoteMessage message) async {
-    getNotifications();
+    notificationsInfo.value = await NotificationService().getNotifications();
+    totalNotifications++;
 
     showSimpleNotification(
       Text(
@@ -75,15 +66,6 @@ class NotificationController extends GetxController {
         Icons.notifications,
         color: AppColors.PRIMARY,
       ),
-      trailing: IconButton(
-        icon: const Icon(
-          Icons.close,
-          color: AppColors.PRIMARY,
-        ),
-        onPressed: () {
-          Get.back();
-        },
-      ),
       elevation: 0,
       duration: const Duration(seconds: 3),
     );
@@ -104,6 +86,9 @@ class NotificationController extends GetxController {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      _messaging.getToken().then((token) {
+        NotificationService().putDeviceToken(token!);
+      });
       FirebaseMessaging.onMessage.listen(onMessage);
     } else {
       print('User declined or has not accepted permission');
@@ -116,7 +101,8 @@ class NotificationController extends GetxController {
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      getNotifications();
+      notificationsInfo.value = await NotificationService().getNotifications();
+      totalNotifications++;
     }
   }
 

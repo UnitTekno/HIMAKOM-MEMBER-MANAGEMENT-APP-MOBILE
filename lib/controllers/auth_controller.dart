@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/app_images.dart';
 import '../data/providers/auth_provider.dart';
-import '../data/services/notification_services.dart';
 import '../models/auth_model.dart';
 import '../routes/app_routes.dart';
 
@@ -23,16 +22,20 @@ class AuthController extends GetxController {
   ];
   Rx<AuthModel> auth = AuthModel(
     user: User(
+      id: 0,
       name: '',
-      nim: '',
       email: '',
-      na: '',
-      namaBagus: '',
-      avatar: '',
+      nim: '',
+      npa: '',
+      nameBagus: '',
+      picture: '',
       year: '',
-      role: '',
+      gender: 0,
+      departmentId: 0,
+      cabinetId: 0,
+      roleName: '',
     ),
-    accessToken: '',
+    token: '',
   ).obs;
   RxBool isLoading = false.obs;
   RxBool isLoginSuccess = false.obs;
@@ -59,7 +62,7 @@ class AuthController extends GetxController {
       final String? accessToken = prefs.getString('accessToken');
       if (accessToken != null) {
         auth.value.user = await AuthProvider().checkLogin();
-        auth.value.accessToken = accessToken;
+        auth.value.token = accessToken;
       }
     } catch (error) {
       print(error);
@@ -75,10 +78,8 @@ class AuthController extends GetxController {
       auth.value = await AuthProvider().login(email, password);
 
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final deviceToken = prefs.getString('fcmToken') ?? '';
-      
-      prefs.setString('accessToken', auth.value.accessToken);
-      NotificationService().putDeviceToken(deviceToken);
+
+      prefs.setString('accessToken', auth.value.token);
 
       isLoginSuccess.value = true;
       await Future.delayed(const Duration(seconds: 1));

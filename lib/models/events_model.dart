@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 EventsModel eventsModelFromJson(String str) =>
     EventsModel.fromJson(json.decode(str));
 
@@ -36,14 +38,17 @@ class Events {
       required this.location,
       required this.type});
 
+
   factory Events.fromJson(Map<String, dynamic> json) {
+    DateTime parsedDate = DateTime.parse(json['date']);
+    String timeString = DateFormat('HH:mm').format(parsedDate);
     return Events(
         id: json['id'],
         poster: json['poster'],
         name: json['name'],
         description: json['description'],
-        date: DateTime.parse(json['date']),
-        time: json['time'],
+        date: parsedDate,
+        time: timeString,
         location: json['location'],
         type: json['type']);
   }

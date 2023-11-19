@@ -50,13 +50,13 @@ class ProfileAppbar extends StatelessWidget {
   }
 
   Widget _buildUserAvatar() {
-    return user.avatar == ''
+    return user.picture == ''
         ? const Icon(
             Icons.person,
             color: Colors.white,
-        )
+          )
         : Image.network(
-            user.avatar,
+            user.picture,
             fit: BoxFit.cover,
           );
   }
@@ -76,7 +76,7 @@ class ProfileAppbar extends StatelessWidget {
   }
 
   Widget _buildUserRole() {
-    final userRole = user.role;
+    final userRole = user.roleName;
 
     return Text(
       userRole,

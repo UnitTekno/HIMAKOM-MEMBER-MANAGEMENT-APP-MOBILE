@@ -8,13 +8,13 @@ import '../../models/auth_model.dart';
 
 class AuthProvider extends GetConnect {
   Future<dynamic> login(String email, String password) async {
-    final response = await post('$BASE_URL/loginApi', {
+    final response = await post('$BASE_URL/login', {
       'email': email,
       'password': password,
     });
 
     if (response.statusCode == 200) {
-      final responseString = json.encode(response.body);
+      final responseString = json.encode(response.body['data']);
       final authModel = authModelFromJson(responseString);
       return authModel;
     } else {
@@ -29,7 +29,7 @@ class AuthProvider extends GetConnect {
       'Authorization': 'Bearer $accessToken',
     });
     if (response.statusCode == 200) {
-      final responseString = json.encode(response.body);
+      final responseString = json.encode(response.body['data']);
       final userModel = userFromJson(responseString);
       return userModel;
     } else {
@@ -40,7 +40,7 @@ class AuthProvider extends GetConnect {
   Future<dynamic> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final accessToken = prefs.getString('accessToken') ?? '';
-    final response = await post('$BASE_URL/logoutApi', null, headers: {
+    final response = await post('$BASE_URL/logout', null, headers: {
       'Authorization': 'Bearer $accessToken',
     });
     if (response.statusCode == 200) {

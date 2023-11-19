@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +52,8 @@ class ListAcara extends StatelessWidget {
                   height: screenHeight <= 700
                       ? screenHeight * 0.22
                       : screenHeight * 0.18,
-                  margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                  margin:
+                      const EdgeInsets.only(bottom: 20, left: 20, right: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.WHITE,
@@ -69,10 +72,11 @@ class ListAcara extends StatelessWidget {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           width: screenWidth * 0.2,
-                          child: Image.network(listAcara[index].poster,
-                              fit: BoxFit.cover,
-                              height: double.infinity,
-                              ),
+                          child: Image.network(
+                            listAcara[index].poster,
+                            fit: BoxFit.cover,
+                            height: double.infinity,
+                          ),
                         ),
                       ),
                       Expanded(

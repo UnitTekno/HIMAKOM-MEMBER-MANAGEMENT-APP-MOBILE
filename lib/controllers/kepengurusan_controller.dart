@@ -1,21 +1,20 @@
 import 'package:get/get.dart';
 import '../data/providers/kepengurusan_provider.dart';
-import '../models/departments_model.dart';
 import '../models/kabinet_model.dart';
-import '../models/kepengurusan_model.dart';
 
 class KepengurusanController extends GetxController {
-  Rx<KepengurusanModel> kepengurusan = KepengurusanModel(
-    status: '',
-    data: [],
-  ).obs;
   Rx<KabinetModel> kabinet = KabinetModel(
-    status: '',
-    data: [],
-  ).obs;
-  Rx<DepartmentsModel> departments = DepartmentsModel(
-    status: '',
-    data: [],
+    id: 0,
+    name: '',
+    description: '',
+    logo: '',
+    year: '',
+    isActive: 0,
+    visi: '',
+    misi: '',
+    filosofies: [],
+    users: [],
+    departments: [],
   ).obs;
   RxInt selectedDepartment = 0.obs;
   RxBool isLoading = false.obs;
@@ -32,21 +31,20 @@ class KepengurusanController extends GetxController {
   Future<void> getKepengurusan() async {
     isLoading.value = true;
     // clear data
-    kepengurusan.value = KepengurusanModel(
-      status: '',
-      data: [],
-    );
     kabinet.value = KabinetModel(
-      status: '',
-      data: [],
+      id: 0,
+      name: '',
+      description: '',
+      logo: '',
+      year: '',
+      isActive: 0,
+      visi: '',
+      misi: '',
+      filosofies: [],
+      users: [],
+      departments: [],
     );
-    departments.value = DepartmentsModel(
-      status: '',
-      data: [],
-    );
-    kepengurusan.value = await KepengurusanProvider().getKepengurusan();
     kabinet.value = await KepengurusanProvider().getKabinet();
-    departments.value = await KepengurusanProvider().getDepartments();
     isLoading.value = false;
   }
 }

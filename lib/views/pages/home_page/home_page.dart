@@ -23,8 +23,6 @@ class HomePage extends GetView<AuthController> {
     final controller = Get.find<KepengurusanController>();
     final controllerAuth = Get.find<AuthController>();
     final controllerNotif = Get.find<NotificationController>();
-    final screenWidth = Get.width;
-    final screenHeight = Get.height;
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
@@ -67,16 +65,15 @@ class HomePage extends GetView<AuthController> {
                             viewportFraction: 0.5,
                             enableInfiniteScroll: false,
                           ),
-                          items: controller.kepengurusan.value.data.map((item) {
-                            final index = controller.kepengurusan.value.data
-                                .indexOf(item);
+                          items: controller.kabinet.value.users.map((item) {
+                            final index =
+                                controller.kabinet.value.users.indexOf(item);
                             return Pengurus(
-                              avatar: controller
-                                  .kepengurusan.value.data[index].avatar,
-                              name: controller
-                                  .kepengurusan.value.data[index].name,
+                              avatar:
+                                  controller.kabinet.value.users[index].picture,
+                              name: controller.kabinet.value.users[index].name,
                               role: controller
-                                  .kepengurusan.value.data[index].role,
+                                  .kabinet.value.users[index].roleName,
                             );
                           }).toList(),
                         )),
@@ -88,69 +85,30 @@ class HomePage extends GetView<AuthController> {
                         Container(
                           // margin: const EdgeInsets.only(bottom),
                           alignment: Alignment.topCenter,
-                          child: Text(
-                              "Kabinet ${controller.kabinet.value.data[0].name}",
-                              style: GoogleFonts.poppins(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center),
+                          child:
+                              Text("Kabinet ${controller.kabinet.value.name}",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center),
                         ),
                         Column(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      backgroundColor: Colors.transparent,
-                                      content: SizedBox(
-                                        child: Image.network(
-                                          controller
-                                              .kabinet.value.data[0].filosofy,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(bottom: 10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  // border: Border.all(color: Colors.white, width: 2),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    ClipOval(
-                                      child: SizedBox(
-                                        width: 150,
-                                        height: 150,
-                                        child: Image.network(
-                                          controller.kabinet.value.data[0].logo,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 0,
-                                      right: 0,
-                                      child: Container(
-                                        padding: const EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: AppColors.PRIMARY,
-                                        ),
-                                        child: const Icon(
-                                          Icons.info,
-                                          color: AppColors.WHITE,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                // border: Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: ClipOval(
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 150,
+                                  child: Image.network(
+                                    controller.kabinet.value.logo,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -194,8 +152,7 @@ class HomePage extends GetView<AuthController> {
                                             height: 10,
                                           ),
                                           Text(
-                                            controller
-                                                .kabinet.value.data[0].visi,
+                                            controller.kabinet.value.visi,
                                             style: GoogleFonts.poppins(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w500,
@@ -224,8 +181,7 @@ class HomePage extends GetView<AuthController> {
                                             height: 10,
                                           ),
                                           Text(
-                                            controller
-                                                .kabinet.value.data[0].misi,
+                                            controller.kabinet.value.misi,
                                             style: GoogleFonts.poppins(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w500,
@@ -244,6 +200,7 @@ class HomePage extends GetView<AuthController> {
                           margin: const EdgeInsets.only(bottom: 20),
                           padding: const EdgeInsets.only(
                               left: 20, right: 20, top: 10, bottom: 10),
+                          height: Get.height * 0.5,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: const [
@@ -267,20 +224,20 @@ class HomePage extends GetView<AuthController> {
                                 height: 10,
                               ),
                               SizedBox(
-                                height: 200,
+                                height: Get.height * 0.4,
                                 child: ListView.builder(
                                   itemCount: controller
-                                      .kabinet.value.data[0].filosofies.length,
+                                      .kabinet.value.filosofies.length,
                                   itemBuilder: (context, index) {
-                                    final filosofiItem = controller.kabinet
-                                        .value.data[0].filosofies[index];
+                                    final filosofiItem = controller
+                                        .kabinet.value.filosofies[index];
                                     return ListTile(
                                       leading: ClipOval(
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
                                           child: Image.network(
-                                            controller.kabinet.value.data[0]
+                                            controller.kabinet.value
                                                 .filosofies[index].logo,
                                             fit: BoxFit.cover,
                                           ),
@@ -328,16 +285,16 @@ class HomePage extends GetView<AuthController> {
                                     autoPlay: true,
                                     initialPage: 1,
                                   ),
-                                  items: controller.departments.value.data
+                                  items: controller.kabinet.value.departments
                                       .map((item) {
                                     final index = controller
-                                        .departments.value.data
+                                        .kabinet.value.departments
                                         .indexOf(item);
                                     return Departments(
-                                      name: controller.departments.value
-                                          .data[index].shortName,
-                                      logo: controller
-                                          .departments.value.data[index].logo,
+                                      name: controller.kabinet.value
+                                          .departments[index].shortName,
+                                      logo: controller.kabinet.value
+                                          .departments[index].logo,
                                     );
                                   }).toList()),
                             ],

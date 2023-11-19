@@ -38,7 +38,6 @@ class DataNotif {
   String body;
   String link;
   String poster;
-  int isRead;
 
   DataNotif({
     required this.id,
@@ -46,7 +45,6 @@ class DataNotif {
     required this.body,
     required this.link,
     required this.poster,
-    required this.isRead,
   });
 
   factory DataNotif.fromJson(Map<String, dynamic> json) => DataNotif(
@@ -55,7 +53,6 @@ class DataNotif {
         body: json["body"],
         link: json["link"],
         poster: json["poster"],
-        isRead: json["is_read"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,6 +61,5 @@ class DataNotif {
         "body": body,
         "link": link,
         "poster": poster,
-        "is_read": isRead,
       };
 }

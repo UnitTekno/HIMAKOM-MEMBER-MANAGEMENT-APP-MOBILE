@@ -59,9 +59,9 @@ class ProfilePage extends GetView {
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
                             ),
-                            child: controller.auth.value.user.avatar.isNotEmpty
+                            child: controller.auth.value.user.picture.isNotEmpty
                                 ? Image.network(
-                                    controller.auth.value.user.avatar,
+                                    controller.auth.value.user.picture,
                                     fit: BoxFit.cover,
                                     width: 200,
                                   )
@@ -92,9 +92,10 @@ class ProfilePage extends GetView {
                                   Container(
                                     margin: const EdgeInsets.only(top: 10),
                                     child: Text(
-                                      controller.auth.value.user.name.isNotEmpty ? 
-                                      controller.auth.value.user.name.toUpperCase()
-                                      : '-',
+                                      controller.auth.value.user.name.isNotEmpty
+                                          ? controller.auth.value.user.name
+                                              .toUpperCase()
+                                          : '-',
                                       style: GoogleFonts.poppins(
                                         color: AppColors.WHITE,
                                         fontSize: 22,
@@ -108,8 +109,9 @@ class ProfilePage extends GetView {
                                   Container(
                                     margin: const EdgeInsets.only(top: 1),
                                     child: Text(
-                                      controller.auth.value.user.nim.isNotEmpty ? 
-                                      controller.auth.value.user.nim : '-',
+                                      controller.auth.value.user.nim.isNotEmpty
+                                          ? controller.auth.value.user.nim
+                                          : '-',
                                       style: GoogleFonts.poppins(
                                         color: Colors.white,
                                         fontSize: 15,
@@ -124,9 +126,9 @@ class ProfilePage extends GetView {
                                   Container(
                                     margin: const EdgeInsets.only(top: 1),
                                     child: Text(
-                                      controller.auth.value.user.namaBagus
+                                      controller.auth.value.user.nameBagus
                                               .isNotEmpty
-                                          ? controller.auth.value.user.namaBagus
+                                          ? controller.auth.value.user.nameBagus
                                           : '-',
                                       style: GoogleFonts.poppins(
                                         color: Colors.white,

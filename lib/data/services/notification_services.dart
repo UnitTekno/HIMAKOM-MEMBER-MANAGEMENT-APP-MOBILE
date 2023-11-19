@@ -24,7 +24,7 @@ class NotificationService extends GetConnect {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final accessToken = prefs.getString('accessToken') ?? '';
     final response = await get(
-      '$BASE_URL/events/notification',
+      '$BASE_URL/notifications',
       headers: {'Authorization': 'Bearer $accessToken'},
     );
     if (response.statusCode == 200) {
@@ -40,7 +40,7 @@ class NotificationService extends GetConnect {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final accessToken = prefs.getString('accessToken') ?? '';
     final response = await get(
-      '$BASE_URL/events/notification/$idNotification/read',
+      '$BASE_URL/notifications/$idNotification/read',
       headers: {'Authorization': 'Bearer $accessToken'},
     );
     return response.body;

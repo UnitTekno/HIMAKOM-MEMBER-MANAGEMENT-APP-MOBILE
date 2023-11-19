@@ -1,3 +1,7 @@
+// To parse this JSON KabinetModel, do
+//
+//     final kabinetModel = kabinetModelFromJson(jsonString);
+
 import 'dart:convert';
 
 KabinetModel kabinetModelFromJson(String str) =>
@@ -6,94 +10,179 @@ KabinetModel kabinetModelFromJson(String str) =>
 String kabinetModelToJson(KabinetModel data) => json.encode(data.toJson());
 
 class KabinetModel {
-  String status;
-  List<Datum> data;
-
-  KabinetModel({
-    required this.status,
-    required this.data,
-  });
-
-  factory KabinetModel.fromJson(Map<String, dynamic> json) => KabinetModel(
-        status: json["status"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
-}
-
-class Datum {
   int id;
   String name;
   String description;
+  String logo;
+  String year;
+  int isActive;
   String visi;
   String misi;
-  String logo;
-  String filosofy;
   List<Filosofy> filosofies;
+  List<User> users;
+  List<Department> departments;
 
-  Datum({
+  KabinetModel({
     required this.id,
     required this.name,
     required this.description,
+    required this.logo,
+    required this.year,
+    required this.isActive,
     required this.visi,
     required this.misi,
-    required this.logo,
-    required this.filosofy,
     required this.filosofies,
+    required this.users,
+    required this.departments,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory KabinetModel.fromJson(Map<String, dynamic> json) => KabinetModel(
         id: json["id"],
         name: json["name"],
         description: json["description"],
+        logo: json["logo"],
+        year: json["year"],
+        isActive: json["is_active"],
         visi: json["visi"],
         misi: json["misi"],
-        logo: json["logo"],
-        filosofy: json["filosofy"],
         filosofies: List<Filosofy>.from(
             json["filosofies"].map((x) => Filosofy.fromJson(x))),
+        users: List<User>.from(json["users"].map((x) => User.fromJson(x))),
+        departments: List<Department>.from(
+            json["departments"].map((x) => Department.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
+        "logo": logo,
+        "year": year,
+        "is_active": isActive,
         "visi": visi,
         "misi": misi,
-        "logo": logo,
-        "filosofy": filosofy,
         "filosofies": List<dynamic>.from(filosofies.map((x) => x.toJson())),
+        "users": List<dynamic>.from(users.map((x) => x.toJson())),
+        "departments": List<dynamic>.from(departments.map((x) => x.toJson())),
       };
 }
 
 class Filosofy {
   int id;
-  int cabinetId;
-  String label;
   String logo;
+  String label;
+  int cabinetId;
 
   Filosofy({
     required this.id,
-    required this.cabinetId,
-    required this.label,
     required this.logo,
+    required this.label,
+    required this.cabinetId,
   });
 
   factory Filosofy.fromJson(Map<String, dynamic> json) => Filosofy(
         id: json["id"],
-        cabinetId: json["cabinet_id"],
+        logo: json["logo"],
         label: json["label"],
+        cabinetId: json["cabinet_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "logo": logo,
+        "label": label,
+        "cabinet_id": cabinetId,
+      };
+}
+
+class User {
+  int id;
+  String name;
+  String email;
+  String nim;
+  String npa;
+  String nameBagus;
+  String picture;
+  String year;
+  int gender;
+  int departmentId;
+  int cabinetId;
+  String roleName;
+
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.nim,
+    required this.npa,
+    required this.nameBagus,
+    required this.picture,
+    required this.year,
+    required this.gender,
+    required this.departmentId,
+    required this.cabinetId,
+    required this.roleName,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+        nim: json["nim"],
+        npa: json["npa"],
+        nameBagus: json["name_bagus"],
+        picture: json["picture"],
+        year: json["year"],
+        gender: json["gender"],
+        departmentId: json["department_id"],
+        cabinetId: json["cabinet_id"],
+        roleName: json["role_name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "nim": nim,
+        "npa": npa,
+        "name_bagus": nameBagus,
+        "picture": picture,
+        "year": year,
+        "gender": gender,
+        "department_id": departmentId,
+        "cabinet_id": cabinetId,
+        "role_name": roleName,
+      };
+}
+
+class Department {
+  int id;
+  String name;
+  String shortName;
+  String description;
+  String logo;
+
+  Department({
+    required this.id,
+    required this.name,
+    required this.shortName,
+    required this.description,
+    required this.logo,
+  });
+
+  factory Department.fromJson(Map<String, dynamic> json) => Department(
+        id: json["id"],
+        name: json["name"],
+        shortName: json["short_name"],
+        description: json["description"],
         logo: json["logo"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "cabinet_id": cabinetId,
-        "label": label,
+        "name": name,
+        "short_name": shortName,
+        "description": description,
         "logo": logo,
       };
 }

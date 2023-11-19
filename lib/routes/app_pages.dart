@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../bindings/notification_binding.dart';
 import '../views/pages/auth_page/auth_page.dart';
 import '../views/pages/base_page.dart';
 import '../views/pages/home_page/home_page.dart';

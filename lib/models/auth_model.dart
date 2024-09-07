@@ -24,7 +24,7 @@ class User {
   String picture;
   String year;
   int gender;
-  int departmentId;
+  int dbuId;
   int cabinetId;
   String roleName;
 
@@ -38,7 +38,7 @@ class User {
     required this.picture,
     required this.year,
     required this.gender,
-    required this.departmentId,
+    required this.dbuId,
     required this.cabinetId,
     required this.roleName,
   });
@@ -53,7 +53,7 @@ class User {
         picture: json["picture"],
         year: json["year"],
         gender: json["gender"],
-        departmentId: json["department_id"],
+        dbuId: json["dbu_id"],
         cabinetId: json["cabinet_id"],
         roleName: json["role_name"],
       );
@@ -68,7 +68,7 @@ class User {
         "picture": picture,
         "year": year,
         "gender": gender,
-        "department_id": departmentId,
+        "dbu_id": dbuId,
         "cabinet_id": cabinetId,
         "role_name": roleName,
       };

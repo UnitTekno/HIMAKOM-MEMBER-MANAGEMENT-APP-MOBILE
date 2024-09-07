@@ -31,7 +31,7 @@ class AuthController extends GetxController {
       picture: '',
       year: '',
       gender: 0,
-      departmentId: 0,
+      dbuId: 0,
       cabinetId: 0,
       roleName: '',
     ),

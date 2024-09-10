@@ -27,7 +27,7 @@ class AuthController extends GetxController {
       email: '',
       nim: '',
       npa: '',
-      nameBagus: '',
+      // nameBagus: '',
       picture: '',
       year: '',
       gender: 0,

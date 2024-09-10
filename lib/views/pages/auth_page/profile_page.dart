@@ -126,10 +126,11 @@ class ProfilePage extends GetView {
                                   Container(
                                     margin: const EdgeInsets.only(top: 1),
                                     child: Text(
-                                      controller.auth.value.user.nameBagus
-                                              .isNotEmpty
-                                          ? controller.auth.value.user.nameBagus
-                                          : '-',
+                                      // controller.auth.value.user.nameBagus
+                                      //         .isNotEmpty
+                                      //     ? controller.auth.value.user.nameBagus
+                                      //     : '-',
+                                      "-",
                                       style: GoogleFonts.poppins(
                                         color: Colors.white,
                                         fontSize: 15,

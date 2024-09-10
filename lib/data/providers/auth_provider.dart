@@ -12,7 +12,7 @@ class AuthProvider extends GetConnect {
       'email': email,
       'password': password,
     });
-
+    
     if (response.statusCode == 200) {
       final responseString = json.encode(response.body['data']);
       final authModel = authModelFromJson(responseString);

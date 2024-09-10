@@ -101,7 +101,7 @@ class User {
   String email;
   String nim;
   String npa;
-  String nameBagus;
+  // String nameBagus;
   String picture;
   String year;
   int gender;
@@ -115,7 +115,7 @@ class User {
     required this.email,
     required this.nim,
     required this.npa,
-    required this.nameBagus,
+    // required this.nameBagus,
     required this.picture,
     required this.year,
     required this.gender,
@@ -130,7 +130,7 @@ class User {
         email: json["email"],
         nim: json["nim"],
         npa: json["npa"],
-        nameBagus: json["name_bagus"],
+        // nameBagus: json["name_bagus"],
         picture: json["picture"],
         year: json["year"],
         gender: json["gender"],
@@ -145,7 +145,7 @@ class User {
         "email": email,
         "nim": nim,
         "npa": npa,
-        "name_bagus": nameBagus,
+        // "name_bagus": nameBagus,
         "picture": picture,
         "year": year,
         "gender": gender,
